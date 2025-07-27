@@ -1,13 +1,12 @@
-# Core dependencies
-streamlit==1.47.1
-fastapi==0.104.1
-uvicorn==0.24.0
-requests==2.31.0
-pydantic==2.5.0
-
-# AI/LLM dependencies (FREE models)
-groq==0.4.1
-google-generativeai==0.3.2
-
-# Environment variables
-python-dotenv==1.0.0
+langchain-groq>=0.1.2
+langchain-openai
+langchain-community
+langgraph
+fastapi
+uvicorn
+requests
+pydantic>=1.10.0,<2.0.0
+python-dotenv
+groq
+google-generativeai
+streamlit
