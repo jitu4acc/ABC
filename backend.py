@@ -6,6 +6,7 @@ load_dotenv()
 from pydantic import BaseModel
 from typing import List, Optional
 
+
 # Import database
 from database import db
 
@@ -25,6 +26,36 @@ class RequestState(BaseModel):
 #Step2: Setup AI Agent from FrontEnd Request
 from fastapi import FastAPI, Request
 from ai_agent import get_response_from_ai_agent
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For development only - restrict this in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# User model
+class User(BaseModel):
+    email: str
+    name: str
+
+# Add a root endpoint
+@app.get("/")
+async def root():
+    return {"message": "API is running"}
+
+# Login endpoint
+@app.post("/login")
+async def login(user: User):
+    # Simple login logic - in a real app you'd validate credentials
+    return {"status": "success", "message": f"Welcome {user.name}!"}
 
 # Only Groq models are supported
 ALLOWED_MODEL_NAMES=["llama3-70b-8192", "mixtral-8x7b-32768", "llama-3.3-70b-versatile"]
