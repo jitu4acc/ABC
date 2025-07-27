@@ -5,11 +5,11 @@
 import streamlit as st
 import requests
 import json
+import os
 from datetime import datetime
 
 # Backend URL
-BACKEND_URL = "http://127.0.0.1:9999"
-
+BACKEND_URL = os.environ.get("BACKEND_URL", "https://abc-wnse.onrender.com/")
 # Initialize session state for authentication and user management
 if 'authenticated' not in st.session_state:
     st.session_state['authenticated'] = False
